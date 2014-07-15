@@ -1,0 +1,2 @@
+accept-bitcoin
+==============
