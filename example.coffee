@@ -1,0 +1,1 @@
+ac = require('./lib/javascript/index')('sagiv')
