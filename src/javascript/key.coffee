@@ -1,10 +1,10 @@
 bitcore  = require 'bitcore'
+crypt  = require './encrypt'
 fs = require 'fs'
 
 class Key
-  constructor: (o = {}) ->
-    @storePath = o.storePath || './keys.json'
-    @wk = new bitcore.WalletKey(o) #Generate a new one (compressed public key, compressed WIF flag)
+  constructor: (@settings) ->
+    @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.generate()
     @printKey()
     @storeKey()
@@ -25,12 +25,12 @@ class Key
     console.log "Public : " + wkObj.pub
     console.log "Addr   : " + wkObj.addr
   
+  #format: private (encryot)|public|address
   storeKey: (wk = @wk) ->
-    console.log 'storePath', @storePath
-    fs.appendFileSync @storePath, '223asda|affsd33dsf|dsflklcaf' + "\n"
+    fs.appendFileSync @settings.storePath, '223asda|affsd33dsf|dsflklcaf' + "\n"
 
   readKeys: ->
-    lines = fs.readFileSync(@storePath).toString().split("\n")
+    lines = fs.readFileSync(@settings.storePath).toString().split("\n")
     console.log lines
 
 module.exports = Key

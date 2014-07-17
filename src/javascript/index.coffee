@@ -17,7 +17,7 @@ class Main
     run()
 
   run = ->
-    key = new Key(network: settings.network, storePath: settings.storePath)
+    key = new Key(settings)
 
   store_keys = ->
     #hw = crypt.encrypt("34c6eb9bbe7fe814f52af3007c12e0364752ed9afb508f8cd89d73f3b3e49710", settings.password)
