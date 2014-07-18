@@ -1,6 +1,5 @@
 http = require 'http'
 bitcore  = require 'bitcore'
-crypt  = require './encrypt'
 Key  = require './key'
 fs = require 'fs'
 
@@ -9,6 +8,7 @@ class Main
     network: bitcore.networks.livenet #testnet / livenet
     password: 'enter_your_password_here'
     storePath: './keys.json'
+    encryptPrivateKey: false
 
   constructor: (address, o = {}) ->
     return 'must have address' unless address

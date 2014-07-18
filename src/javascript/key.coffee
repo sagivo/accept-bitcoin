@@ -13,7 +13,6 @@ class Key
     @wk
     
   printKey: (wk = @wk) ->
-    console.log 'xxxxwk'
     console.log "## Network: " + wk.network.name
     console.log "*** Hex Representation"
     console.log "Private: " + bitcore.buffertools.toHex(wk.privKey.private)
@@ -25,9 +24,15 @@ class Key
     console.log "Public : " + wkObj.pub
     console.log "Addr   : " + wkObj.addr
   
-  #format: private (encryot)|public|address
+  #format: address[0]|public-hex[1]|private-hex-crypt[2]
   storeKey: (wk = @wk) ->
-    fs.appendFileSync @settings.storePath, '223asda|affsd33dsf|dsflklcaf' + "\n"
+    wkObj = wk.storeObj()
+    privateKey = if @settings.encryptPrivateKey then crypt.encrypt(bitcore.buffertools.toHex(wk.privKey.private), @settings.password) else bitcore.buffertools.toHex(wk.privKey.private)
+    fs.appendFileSync(@settings.storePath,  
+        wkObj.addr + "|" +
+        bitcore.buffertools.toHex(wk.privKey.public) + "|" +
+        privateKey + "\n"
+    )
 
   readKeys: ->
     lines = fs.readFileSync(@settings.storePath).toString().split("\n")
