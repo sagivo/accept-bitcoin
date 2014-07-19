@@ -6,11 +6,14 @@ class Key
   constructor: (@settings) ->
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.generate()
-    @printKey()
-    @storeKey()
+    #@printKey()
+    @storeKey()    
 
   key: ->
     @wk
+
+  address: ->
+    @wk.storeObj().addr #return the bitcoin address
     
   printKey: (wk = @wk) ->
     console.log "## Network: " + wk.network.name
