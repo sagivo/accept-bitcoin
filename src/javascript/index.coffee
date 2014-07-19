@@ -2,6 +2,8 @@ http = require 'http'
 bitcore  = require 'bitcore'
 Key  = require './key'
 fs = require 'fs'
+util = require 'util'
+ee = require('events').EventEmitter
 
 class Main
   settings =
@@ -15,8 +17,9 @@ class Main
 
   constructor: (address, o = {}) ->    
     return 'must have address' unless address
+    ee.call(this)
     console.log 'hello ' + address
-    @settings = extend(settings, o)    
+    @settings = extend(settings, o)
     #generateKey()
 
   generateKey: ->
@@ -24,6 +27,8 @@ class Main
     key.address()
 
   paymentRequest: (params, cb) ->
+    console.log 'aasafds3'
+    key = @generateKey()    
     cb(null, settings.payToAddress)
 
   #store_keys = ->
@@ -37,5 +42,7 @@ extend = (object, properties) ->
     object[key] = val
   object
 
+Main.prototype.__proto__ = ee.prototype
+#util.inherits(Main, ee)
 
 module.exports = Main
