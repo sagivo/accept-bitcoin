@@ -2,7 +2,6 @@ http = require 'http'
 bitcore  = require 'bitcore'
 Key  = require './key'
 fs = require 'fs'
-util = require 'util'
 ee = require('events').EventEmitter
 
 class Main
@@ -28,7 +27,8 @@ class Main
 
   paymentRequest: (params, cb) ->
     console.log 'aasafds3'
-    key = @generateKey()    
+    key = @generateKey()
+    this.emit('foo', 'bar')
     cb(null, settings.payToAddress)
 
   #store_keys = ->
