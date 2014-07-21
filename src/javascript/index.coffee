@@ -1,6 +1,7 @@
 http = require 'http'
 bitcore  = require 'bitcore'
 Key  = require './key'
+Transaction  = require './transaction'
 fs = require 'fs'
 ee = require('events').EventEmitter
 
@@ -11,7 +12,8 @@ class Main
     storePath: './keys.json'
     encryptPrivateKey: false
     payToAddress: 'nulssdl'
-    checkTransactionEvery: (1000 * 60 * 10) #10 minutes
+    checkTransactionEvery: 2000#(1000 * 60 * 10) #10 minutes
+    checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
 
   constructor: (address, o = {}) ->    
@@ -19,6 +21,10 @@ class Main
     ee.call(this)
     console.log 'hello ' + address
     @settings = extend(settings, o)
+    
+    tx = new Transaction(@settings)
+    tx.checkBalance '14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn', (err, d) ->
+      console.log 'd'
     #generateKey()
 
   generateKey: ->
