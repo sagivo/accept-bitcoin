@@ -12,7 +12,7 @@ class Main
     storePath: './keys.json'
     encryptPrivateKey: false
     payToAddress: 'nulssdl'
-    checkTransactionEvery: 2000#(1000 * 60 * 10) #10 minutes
+    checkTransactionEvery: 1000#(1000 * 60 * 10) #10 minutes
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
 
@@ -23,8 +23,9 @@ class Main
     @settings = extend(settings, o)
     
     tx = new Transaction(@settings)
-    tx.checkBalance '14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn', (err, d) ->
-      console.log 'd'
+    tx.checkBalance '14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn', (err, d) =>
+      console.log err,d
+      this.emit('foo', 'found!')
     #generateKey()
 
   generateKey: ->
@@ -32,9 +33,8 @@ class Main
     key.address()
 
   paymentRequest: (params, cb) ->
-    console.log 'aasafds3'
     key = @generateKey()
-    this.emit('foo', 'bar')
+    
     cb(null, settings.payToAddress)
 
   #store_keys = ->
