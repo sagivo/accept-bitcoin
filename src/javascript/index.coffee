@@ -33,9 +33,7 @@ class Main
     key.address()
 
   paymentRequest: (params, cb) ->
-    console.log 'xxxxx'
     key = @generateKey()
-    
     cb(null, settings.payToAddress)
 
   #store_keys = ->
