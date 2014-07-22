@@ -22,19 +22,11 @@ class Main
     console.log 'hello ' + address
     @settings = extend(settings, o)
     
-    tx = new Transaction(@settings)
-    tx.checkBalance '14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn', (err, d) =>
-      console.log err,d
+    key = new Key(@settings)
+    tx = new Transaction(key, @settings)
+    tx.checkBalance (err, d) => #14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn
+      console.log err, d
       this.emit('foo', 'found!')
-    #generateKey()
-
-  generateKey: ->
-    key = new Key(settings)
-    key.address()
-
-  paymentRequest: (params, cb) ->
-    key = @generateKey()
-    cb(null, settings.payToAddress)
 
   #store_keys = ->
     #hw = crypt.encrypt("34c6eb9bbe7fe814f52af3007c12e0364752ed9afb508f8cd89d73f3b3e49710", settings.password)

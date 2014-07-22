@@ -9,7 +9,7 @@ class Key
     #@printKey()
     @storeKey()    
 
-  key: ->
+  wk: ->
     @wk
 
   address: ->
