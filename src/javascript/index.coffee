@@ -11,8 +11,8 @@ class Main
     password: 'enter_your_password_here'
     storePath: './keys.json'
     encryptPrivateKey: false
-    payToAddress: 'nulssdl'
-    checkTransactionEvery: 1000#(1000 * 60 * 10) #10 minutes
+    payToAddress: 'some'
+    checkTransactionEvery: 4000#(1000 * 60 * 10) #10 minutes
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
 
@@ -33,6 +33,7 @@ class Main
     key.address()
 
   paymentRequest: (params, cb) ->
+    console.log 'xxxxx'
     key = @generateKey()
     
     cb(null, settings.payToAddress)
