@@ -25,7 +25,7 @@ class Main
     key = new Key(@settings)
     tx = new Transaction(key, @settings)
     tx.checkBalance (err, d) => #14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn
-      console.log err, d
+      #console.log err, d
       this.emit('foo', 'found!')
 
   #store_keys = ->

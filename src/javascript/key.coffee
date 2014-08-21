@@ -14,7 +14,10 @@ class Key
 
   address: ->
     @wk.storeObj().addr #return the bitcoin address
-    
+
+  privateKey: ->
+    bitcore.buffertools.toHex(@wk.privKey.private)
+
   printKey: (wk = @wk) ->
     console.log "## Network: " + wk.network.name
     console.log "*** Hex Representation"
