@@ -11,7 +11,8 @@ class Main
     password: 'enter_your_password_here'
     storePath: './keys.json'
     encryptPrivateKey: false
-    payToAddress: 'some'
+    payToAddress: 'payToAddress'
+    payReminderToAddress: 'payReminderToAddress'
     checkTransactionEvery: 4000#(1000 * 60 * 10) #10 minutes
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
@@ -26,7 +27,9 @@ class Main
     tx = new Transaction(key, @settings)
     tx.checkBalance (err, d) => #14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn
       #console.log err, d
-      this.emit('foo', 'found!')
+      tx.transferPayment (err, d) ->
+        console.log d
+      #this.emit('foo', d)
 
   #store_keys = ->
     #hw = crypt.encrypt("34c6eb9bbe7fe814f52af3007c12e0364752ed9afb508f8cd89d73f3b3e49710", settings.password)
