@@ -35,7 +35,6 @@ class Transaction
       #console.log "building options: ", options, "unspent:", unspent, "outs:", outs, "sign:",@key.privateKey()
       tx = new bitcore.TransactionBuilder(options).setUnspent(unspent).setOutputs(outs).sign([@key.privateKey()]).build()
       txHex = tx.serialize().toString('hex')
-      console.log 'builder hex', txHex
       cb null, txHex
 
   uotxToHash: (address, o) ->
