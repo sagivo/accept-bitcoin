@@ -19,8 +19,8 @@ class Transaction
       body = JSON.parse(body) 
       return null unless body.status == 'success' and body.data?.unspent?.length > 0
       clearInterval @checkBalanceInterval     
-      @unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)
-      @cb null, @unspent if @cb
+      unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)
+      @cb null, unspent if @cb
 
   #must = payToAddress | options = transferAmount, payReminderToAddress
   transferPayment: (payToAddress, o = {}, cb) =>
