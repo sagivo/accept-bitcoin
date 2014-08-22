@@ -24,7 +24,7 @@ class Transaction
       @cb null, unspent if @cb
 
   #must = payToAddress | options = transferAmount, payReminderToAddress
-  transferPayment: (payToAddress, o = {}, cb) =>
+  transferPaymentHash: (payToAddress, o = {}, cb) =>
     return cb('must have payToAddress') unless payToAddress
     @checkBalance address: @key.address(), (err, unspent) =>
       #console.log "xxxx", @key.privateKey()

@@ -28,7 +28,7 @@ class Main
     
     tx = new Transaction(key, @settings)
     #tx.checkBalance (err, d) =>
-    tx.transferPayment 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY', transferAmount: '0.0001', (err, d) =>
+    tx.transferPaymentHash 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY', transferAmount: '0.0001', (err, d) =>
       console.log err, d      
       #tx.transferPayment (err, d) ->
       #  console.log d
