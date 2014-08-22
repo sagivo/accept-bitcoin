@@ -7,12 +7,13 @@ ee = require('events').EventEmitter
 
 class Main
   settings =
-    network: bitcore.networks.livenet #testnet / livenet
+    network: bitcore.networks.testnet #testnet / livenet
     password: 'enter_your_password_here'
     storePath: './keys.json'
     encryptPrivateKey: false
-    payToAddress: 'payToAddress'
-    payReminderToAddress: 'payReminderToAddress'
+    payToAddress: 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY'
+    payReminderToAddress: null
+    includeUnconfirmed: false
     checkTransactionEvery: 4000#(1000 * 60 * 10) #10 minutes
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
