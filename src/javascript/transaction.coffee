@@ -20,25 +20,25 @@ class Transaction
       body = JSON.parse(body) 
       return null unless body.status == 'success' and body.data?.unspent?.length > 0
       clearInterval @checkBalanceInterval     
-      unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)      
+      unspent = (@uotxToHash(body.data.address, tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)      
       @cb null, unspent if @cb
 
   #must = payToAddress | options = transferAmount, payReminderToAddress
   transferPayment: (payToAddress, o = {}, cb) =>
-    console.log "xxxx", @key
     return cb('must have payToAddress') unless payToAddress
     @checkBalance address: @key.address(), (err, unspent) =>
       #console.log "xxxx", @key.privateKey()
       #pay back
       transferAmount = o.transferAmount || unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0    
       outs = [{address: payToAddress, amount: transferAmount}]
-      options = remainderOut: address: o.payReminderToAddress || @settings.payReminderToAddress || @key.address()
-      tx = new bitcore.TransactionBuilder(options).setUnspent(unspent).setOutputs(outs).sign(@key.privateKey()).build()
+      options = remainderOut: address: o.payReminderToAddress || @settings.payReminderToAddress || @key.address()      
+      #console.log "building options: ", options, "unspent:", unspent, "outs:", outs, "sign:",@key.privateKey()
+      tx = new bitcore.TransactionBuilder(options).setUnspent(unspent).setOutputs(outs).sign([@key.privateKey()]).build()
       txHex = tx.serialize().toString('hex')
       console.log 'builder hex', txHex
       cb null, txHex
 
-  uotxToHash: (o) ->
-    txid: o.tx, vout: o.n, address: @address, scriptPubKey: o.script, amount: o.amount, confirmations: o.confirmations
+  uotxToHash: (address, o) ->
+    txid: o.tx, vout: o.n, address: address, scriptPubKey: o.script, amount: o.amount, confirmations: o.confirmations
     
 module.exports = Transaction  

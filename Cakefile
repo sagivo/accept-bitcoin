@@ -3,7 +3,7 @@ cp = require 'child_process'
 
 task 'build', 'Build extension code into build/', ->
   #cofeescript listener
-  cofee = cp.spawn "coffee", ["-o", "lib/javascript/", "--bare", "-cw", "src/javascript/"]
+  cofee = cp.spawn "coffee", ["-o", "lib/javascript/", "-cw", "src/javascript/"]
   cofee.stdout.on 'data', (d) ->
     console.log d
   cofee.stderr.on 'error', (d) ->
