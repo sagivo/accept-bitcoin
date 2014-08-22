@@ -8,6 +8,7 @@ class Transaction
   checkBalance: (o, @cb) ->
     address = o.address || @key.address()
     includeUnconfirmed = o.includeUnconfirmed || @settings.includeUnconfirmed
+    @cb = o if typeof(o) is "function"
     @checkBalanceInterval = setInterval(@getUnspent(address, includeUnconfirmed), @settings.checkTransactionEvery)
     
   getUnspent: (address, includeUnconfirmed) =>
@@ -19,7 +20,7 @@ class Transaction
       body = JSON.parse(body) 
       return null unless body.status == 'success' and body.data?.unspent?.length > 0
       clearInterval @checkBalanceInterval     
-      unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)
+      unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)      
       @cb null, unspent if @cb
 
   #must = payToAddress | options = transferAmount, payReminderToAddress

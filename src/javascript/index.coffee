@@ -26,11 +26,12 @@ class Main
     
     key = new Key(@settings, 'mndB5QpRPu8GDudQqgpjB73vFWHENjYWxT', '1637672f6705d8fb439fd52da622bad49ddb340b64182b795fc3a8d0d4667ecf')
     tx = new Transaction(key, @settings)
-    tx.checkBalance (err, d) => #14nsgXjL7xCEXFf8UkGCm9KnSTTFBDKqcn
-      console.log err, d
+    tx.checkBalance (err, d) =>
+      console.log 'here?'
+      console.log err, d      
       #tx.transferPayment (err, d) ->
       #  console.log d
-      #this.emit('foo', d)
+      this.emit('foo', d)
 
   #store_keys = ->
     #hw = crypt.encrypt("34c6eb9bbe7fe814f52af3007c12e0364752ed9afb508f8cd89d73f3b3e49710", settings.password)
