@@ -24,10 +24,10 @@ class Main
     console.log 'hello ' + address
     @settings = extend(settings, o)
     
-    key = new Key(@settings, 'mndB5QpRPu8GDudQqgpjB73vFWHENjYWxT', '1637672f6705d8fb439fd52da622bad49ddb340b64182b795fc3a8d0d4667ecf')
+    key = new Key(@settings, 'mndB5QpRPu8GDudQqgpjB73vFWHENjYWxT', '1637672f6705d8fb439fd52da622bad49ddb340b64182b795fc3a8d0d4667ecf')    
     tx = new Transaction(key, @settings)
-    tx.checkBalance (err, d) =>
-      console.log 'here?'
+    #tx.checkBalance (err, d) =>
+    tx.transferPayment 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY', transferAmount: '0.01', (err, d) =>
       console.log err, d      
       #tx.transferPayment (err, d) ->
       #  console.log d

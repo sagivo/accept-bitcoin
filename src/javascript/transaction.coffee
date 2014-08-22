@@ -25,8 +25,10 @@ class Transaction
 
   #must = payToAddress | options = transferAmount, payReminderToAddress
   transferPayment: (payToAddress, o = {}, cb) =>
+    console.log "xxxx", @key
     return cb('must have payToAddress') unless payToAddress
-    checkBalance address: @key.address(), (err, unspent) =>
+    @checkBalance address: @key.address(), (err, unspent) =>
+      #console.log "xxxx", @key.privateKey()
       #pay back
       transferAmount = o.transferAmount || unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0    
       outs = [{address: payToAddress, amount: transferAmount}]
