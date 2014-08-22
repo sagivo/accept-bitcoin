@@ -8,7 +8,7 @@ class Transaction
   checkBalance: (o, @cb) ->
     address = o.address || @key.address()
     includeUnconfirmed = o.includeUnconfirmed || @settings.includeUnconfirmed
-    @cb = o if typeof(o) is "function"
+    @cb = o if o instanceof Function
     @checkBalanceInterval = setInterval(@getUnspent(address, includeUnconfirmed), @settings.checkTransactionEvery)
     
   getUnspent: (address, includeUnconfirmed) =>
