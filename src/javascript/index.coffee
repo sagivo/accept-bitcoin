@@ -15,6 +15,7 @@ class Main
     payReminderToAddress: null
     includeUnconfirmed: false
     checkTransactionEvery: 1000 #(1000 * 60 * 2) #2 minutes
+    checkBalanceTimeout: (1000 * 60 * 60) #60 minutes timeout
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
 

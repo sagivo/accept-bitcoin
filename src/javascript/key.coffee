@@ -52,12 +52,16 @@ class Key
     console.log lines
 
   checkBalance: =>
+    checkBalanceTimeout = setTimeout ->
+      this.emit('checkBalanceTimeout')
+    , @settings.checkBalanceTimeout
+
     checkBalanceInterval = setInterval( =>
         console.log "checking balance for #{@address()}"
         request.get "http://#{if @settings.network == bitcore.networks.testnet then 't' else ''}btc.blockr.io/api/v1/address/info/#{@address()}#{ if @settings.includeUnconfirmed then '?unconfirmed=1' else '' }", (error, response, body) =>
           body = JSON.parse(body) 
           if body.status == 'success' and body.data?.balance > 0
-            clearInterval checkBalanceInterval
+            clearInterval checkBalanceInterval; clearTimeout checkBalanceTimeout
             this.emit('haveBalance', null, body.data?.balance)
       , @settings.checkTransactionEvery)
     
