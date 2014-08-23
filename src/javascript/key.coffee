@@ -63,8 +63,7 @@ class Key
           if body.status == 'success' and body.data?.balance > 0
             clearInterval checkBalanceInterval; clearTimeout checkBalanceTimeout
             this.emit('haveBalance', null, body.data?.balance)
-      , @settings.checkTransactionEvery)
-    
+      , @settings.checkTransactionEvery)    
 
 Key.prototype.__proto__ = ee.prototype
 module.exports = Key
