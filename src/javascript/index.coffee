@@ -16,7 +16,7 @@ class Main
     includeUnconfirmed: false
     checkTransactionEvery: 4000#(1000 * 60 * 10) #10 minutes
     checkTransactionMaxAttempts: 10
-    minimumConfirmations: 6
+    minimumConfirmations: 1
 
   constructor: (address, o = {}) ->    
     return 'must have address' unless address
@@ -24,21 +24,11 @@ class Main
     console.log 'hello ' + address
     @settings = extend(settings, o)
     
-    key = new Key @settings, 'mndB5QpRPu8GDudQqgpjB73vFWHENjYWxT', 'cSnVqjE4vMuHzVd4b5oXCELh8sNoBSPVjfqKpUFam8Z2HaKyjFxB'
-    
+    key = new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
     tx = new Transaction(key, @settings)
     #tx.checkBalance (err, d) =>
-    tx.transferPaymentHash 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY', transferAmount: '0.0001', (err, d) =>
-      console.log err, d      
-      #tx.transferPayment (err, d) ->
-      #  console.log d
+    tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
       this.emit('foo', d)
-
-  #store_keys = ->
-    #hw = crypt.encrypt("34c6eb9bbe7fe814f52af3007c12e0364752ed9afb508f8cd89d73f3b3e49710", settings.password)
-    #console.log hw
-    #console.log crypt.decrypt(hw, settings.password)    
-
 
 extend = (object, properties) ->
   for key, val of properties
@@ -46,6 +36,4 @@ extend = (object, properties) ->
   object
 
 Main.prototype.__proto__ = ee.prototype
-#util.inherits(Main, ee)
-
 module.exports = Main

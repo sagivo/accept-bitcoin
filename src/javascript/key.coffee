@@ -5,8 +5,8 @@ fs = require 'fs'
 class Key
   constructor: (@settings, @publicKey, @privateKeyHex) ->
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
-    #@wk.fromObj priv: '1637672f6705d8fb439fd52da622bad49ddb340b64182b795fc3a8d0d4667ecf'
-    if arguments.length == 1 
+    @wk.fromObj priv: @privateKeyHex if @privateKeyHex
+    if arguments.length <= 1 
       @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
       @wk.generate()
       @storeKey()

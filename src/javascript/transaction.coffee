@@ -27,8 +27,6 @@ class Transaction
   transferPaymentHash: (payToAddress, o = {}, cb) =>
     return cb('must have payToAddress') unless payToAddress
     @checkBalance address: @key.address(), (err, unspent) =>
-      #console.log "xxxx", @key.privateKey()
-      #pay back
       transferAmount = o.transferAmount || unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0    
       outs = [{address: payToAddress, amount: transferAmount}]
       options = remainderOut: address: o.payReminderToAddress || @settings.payReminderToAddress || @key.address()      
@@ -36,6 +34,12 @@ class Transaction
       tx = new bitcore.TransactionBuilder(options).setUnspent(unspent).setOutputs(outs).sign([@key.privateKey()]).build()
       txHex = tx.serialize().toString('hex')
       cb null, txHex
+
+  #must = payToAddress | options = transferAmount, payReminderToAddress
+  pushTx: (payToAddress, o = {}, cb) =>
+    @transferPaymentHash payToAddress, o, (err, hex) =>
+      request.post url: "http://#{if @settings.network == bitcore.networks.testnet then 't' else ''}btc.blockr.io/api/v1/tx/push", json: {hex: hex}, (error, response, body) =>
+        cb err, body
 
   uotxToHash: (address, o) ->
     txid: o.tx, vout: o.n, address: address, scriptPubKey: o.script, amount: o.amount, confirmations: o.confirmations
