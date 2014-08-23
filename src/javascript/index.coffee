@@ -24,11 +24,15 @@ class Main
     console.log 'hello ' + address
     @settings = extend(settings, o)
     
-    key = new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
-    tx = new Transaction(key, @settings)
+    #key = new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
+    #tx = new Transaction(key, @settings)
     #tx.checkBalance (err, d) =>
-    tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
-      this.emit('foo', d)      
+    #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
+    #  this.emit('foo', d)
+
+  generateKey: (cb) ->
+    new Key @settings
+    
 
 extend = (object, properties) ->
   for key, val of properties

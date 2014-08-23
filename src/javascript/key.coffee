@@ -1,9 +1,11 @@
 bitcore  = require 'bitcore'
 crypt  = require './encrypt'
 fs = require 'fs'
+ee = require('events').EventEmitter
 
 class Key
   constructor: (@settings, @publicKey, @privateKeyWif) ->
+    ee.call(this)
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.fromObj priv: @privateKeyWif if @privateKeyWif
     if arguments.length <= 1
@@ -48,4 +50,5 @@ class Key
     lines = fs.readFileSync(@settings.storePath).toString().split("\n")
     console.log lines
 
+Main.prototype.__proto__ = ee.prototype
 module.exports = Key
