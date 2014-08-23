@@ -14,7 +14,7 @@ class Main
     payToAddress: 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY'
     payReminderToAddress: null
     includeUnconfirmed: false
-    checkTransactionEvery: 120000 #(1000 * 60 * 2) #2 minutes
+    checkTransactionEvery: 1000 #(1000 * 60 * 2) #2 minutes
     checkTransactionMaxAttempts: 10
     minimumConfirmations: 6
 
@@ -30,8 +30,8 @@ class Main
     #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
     #  this.emit('foo', d)
 
-  generateKey: (cb) ->
-    new Key @settings
+  generateAddress: (cb) ->
+    new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
     
 
 extend = (object, properties) ->
