@@ -3,11 +3,10 @@ crypt  = require './encrypt'
 fs = require 'fs'
 
 class Key
-  constructor: (@settings, @publicKey, @privateKeyHex) ->
+  constructor: (@settings, @publicKey, @privateKeyWif) ->
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
-    @wk.fromObj priv: @privateKeyHex if @privateKeyHex
-    if arguments.length <= 1 
-      @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
+    @wk.fromObj priv: @privateKeyWif if @privateKeyWif
+    if arguments.length <= 1
       @wk.generate()
       @storeKey()
     @printKey(@wk)
@@ -19,11 +18,11 @@ class Key
     @publicKey || @wk.storeObj().addr #return the bitcoin address
 
   privateKey: =>    
-    @privateKeyHex || @wk.storeObj().priv
+    @privateKeyWif || @wk.storeObj().priv
 
   printKey: (wk = @wk) =>
-    if @publicKey and @privateKeyHex
-      console.log "public: #{@publicKey} private: #{@privateKeyHex}"
+    if @publicKey and @privateKeyWif
+      console.log "public: #{@publicKey} private: #{@privateKeyWif}"
     else
       console.log "## Network: " + wk.network.name
       console.log "*** Hex Representation"
