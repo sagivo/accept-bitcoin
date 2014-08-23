@@ -14,9 +14,9 @@ class Main
     payToAddress: 'n3CDcrQExa956Juv4jf5L59YNAxhKAWnMY'
     payReminderToAddress: null
     includeUnconfirmed: false
-    checkTransactionEvery: 4000#(1000 * 60 * 10) #10 minutes
+    checkTransactionEvery: 120000 #(1000 * 60 * 2) #2 minutes
     checkTransactionMaxAttempts: 10
-    minimumConfirmations: 1
+    minimumConfirmations: 6
 
   constructor: (address, o = {}) ->    
     return 'must have address' unless address
