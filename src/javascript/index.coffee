@@ -28,7 +28,7 @@ class Main
     tx = new Transaction(key, @settings)
     #tx.checkBalance (err, d) =>
     tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
-      this.emit('foo', d)
+      this.emit('foo', d)      
 
 extend = (object, properties) ->
   for key, val of properties
