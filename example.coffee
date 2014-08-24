@@ -1,14 +1,12 @@
 Ac = require('./lib/javascript/index')
 ac = new Ac('sagiv ofek')
-key = ac.generateAddress()
 
-key.on 'haveBalance', (err, d) ->
-  console.log "have balance", d
+key = ac.generateAddress(alertWhenHasBalance: true)
+console.log "please pay to: " + key.address()
+key.on 'hasBalance', (amount) ->
+  console.log "thanks for paying me " + amount
+  key.transferBalanceToMyAccount fee: 0, (err, d) ->
+    console.log "DONE", d
 
-key.checkBalance()
-#console.log ac.generateKey()
-ac.on 'foo', (d) ->
-  console.log 'result foo:', d
-#ac.paymentRequest a: 'bb', (err, d) ->
-#  console.log d
-
+#key.transferPaymentHash 'muVxU1ZH4yLbV9FrjD3WXv5bzD2JChSkhw', (err, d) ->
+#  console.log "DONE", d
