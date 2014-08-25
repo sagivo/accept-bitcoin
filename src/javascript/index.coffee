@@ -27,7 +27,6 @@ class Main
     ee.call(this)
     console.log 'hello ' + address
     @settings = extend(settings, o)
-    
     #key = new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
     #tx = new Transaction(key, @settings)
     #tx.checkBalance (err, d) =>
