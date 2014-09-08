@@ -11,9 +11,9 @@ class Key
     cb = @publicKey if @publicKey instanceof Function
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.fromObj priv: @privateKeyWif if @privateKeyWif
-    if arguments.length <= 1 or cb
+    unless @privateKeyWif
       @wk.generate()
-      if cb
+      if cb 
         cb @wk
       else @storeKey()
     @printKey(@wk)

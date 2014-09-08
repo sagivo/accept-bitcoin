@@ -1,7 +1,8 @@
 Ac = require('./lib/javascript/index')
 ac = new Ac('sagiv ofek')
 
-key = ac.generateAddress(alertWhenHasBalance: true)
+key = ac.generateAddress alertWhenHasBalance: true, (key) ->
+  console.log "we have a key!",key
 console.log "please pay to: " + key.address()
 key.on 'hasBalance', (amount) ->
   console.log "thanks for paying me " + amount

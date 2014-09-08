@@ -33,8 +33,8 @@ class Main
     #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
     #  this.emit('foo', d)
 
-  generateAddress: (set) =>
-    key = new Key @settings#, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
+  generateAddress: (set, cb) =>
+    key = new Key @settings, cb#, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
     key.checkBalance() if set.alertWhenHasBalance      
     key
 
