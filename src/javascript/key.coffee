@@ -5,13 +5,17 @@ request = require 'request'
 ee = require('events').EventEmitter
 
 class Key
+  #settings, callback(key)
   constructor: (@settings, @publicKey, @privateKeyWif) ->
     ee.call(this)
+    cb = @publicKey if @publicKey instanceof Function
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.fromObj priv: @privateKeyWif if @privateKeyWif
-    if arguments.length <= 1
+    if arguments.length <= 1 or cb
       @wk.generate()
-      @storeKey()
+      if cb
+        cb @wk
+      else @storeKey()
     @printKey(@wk)
 
   wk: =>
