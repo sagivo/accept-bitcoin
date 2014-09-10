@@ -8,7 +8,7 @@ class Key
   #settings, callback(key)
   constructor: (@settings, @publicKey, @privateKeyWif) ->
     ee.call(this)
-    @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
+    @wk = new bitcore.WalletKey(network: if @settings.network == 'live' then bitcore.networks.livenet else bitcore.networks.testnet) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.fromObj priv: @privateKeyWif if @privateKeyWif
     unless @privateKeyWif
       @wk.generate()

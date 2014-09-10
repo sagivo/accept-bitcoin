@@ -28,8 +28,9 @@ You can override the default settings on creating
 
 Examples are provided [here](https://github.com/sagivo/accept-bitcoin/blob/master/examples.js)
 ```javascript
-var settings = {payToAddress: 'YOUR_BITCOIN_ADDRESS'};
-var ac = require('accept-bitcoin')(settings);
+var settings = {network: 'live'}
+var acceptBitcoin = require('accept-bitcoin');
+ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS', settings);
 key = ac.generateAddress({alertWhenHasBalance: true});
 console.log("Hello buyer! please pay to: " + key.address());
 key.on('hasBalance', function(amount){
@@ -44,7 +45,7 @@ key.on('hasBalance', function(amount){
 
 You can override the default settings:  
   - **payToAddress**: Your bitcoin adress you wish to transfer incomes to. 
-  - **network**: choose your bitcoin RPC env. values are: `bitcore.networks.testnet` and `bitcore.networks.livenet`
+  - **network**: choose your bitcoin RPC env. values are: `test` and `live`
 nore info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js)  
   - **password**: choose your random password to encrypt generated keys.  
   - **storePath**: path to store a file containing all the ad-hoc generated keys. Default is `./keys.json`

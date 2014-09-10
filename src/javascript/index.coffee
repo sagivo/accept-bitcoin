@@ -8,7 +8,7 @@ ee = require('events').EventEmitter
 
 class Main
   settings =
-    network: bitcore.networks.testnet #testnet / livenet
+    network: test #test / live
     password: 'enter_your_password_here'
     storePath: './keys.json' #null if no need to store
     encryptPrivateKey: false
