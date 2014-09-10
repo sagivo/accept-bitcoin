@@ -34,7 +34,7 @@ class Main
 
   generateAddress: (o) =>
     key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
-    key.checkBalance() if o.alertWhenHasBalance
+    key.checkBalance() if o and o.alertWhenHasBalance
     key
 
 extend = (object, properties) ->

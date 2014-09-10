@@ -1,6 +1,6 @@
 {
   "name": "accept-bitcoin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "accept bitcoins on your projects",
   "main": "lib/javascript/index.js",
   "repository": {
