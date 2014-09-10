@@ -63,7 +63,7 @@ This class is responsible for creating new bitcoin adresses, storing them and tr
 `checkBalance()`- check and notify you when an address has minimum balance.
 `payTo(payToAddress, options, callback)` - transger all balance of this address to another address.
 
-###encrypt class
+###Encrypt class
 Cointains helpers to encrypt and decrypt strings. Used for storing your keys data locally.  
 
 ##Contribute
