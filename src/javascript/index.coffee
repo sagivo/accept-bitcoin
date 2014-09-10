@@ -12,10 +12,10 @@ class Main
     password: 'enter_your_password_here'
     storePath: './keys.json' #null if no need to store
     encryptPrivateKey: false
-    payToAddress: 'mj9vnQvXr4LhLVK1NppXkxo83DaJ5YKarQ'
+    payToAddress: 'PUT_YOUR_ADDRESS_HERE'
     payReminderToAddress: null
     includeUnconfirmed: false
-    checkTransactionEvery: 5000 #(1000 * 60 * 2) #2 minutes
+    checkTransactionEvery: (1000 * 60 * 2) #2 minutes dev: 5000
     checkBalanceTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout --remove
     checkUnspentTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout
     minimumConfirmations: 1
@@ -33,7 +33,7 @@ class Main
     #  this.emit('foo', d)
 
   generateAddress: (o) =>
-    key = new Key extend(settings, o), 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
+    key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
     key.checkBalance() if o.alertWhenHasBalance
     key
 
