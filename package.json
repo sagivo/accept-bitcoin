@@ -1,5 +1,5 @@
 {
-  "name": "accept-bitoin",
+  "name": "accept-bitcoin",
   "version": "0.0.2",
   "description": "accept bitcoins on your projects",
   "main": "lib/javascript/index.js",
