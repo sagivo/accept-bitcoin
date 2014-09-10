@@ -8,14 +8,11 @@ class Key
   #settings, callback(key)
   constructor: (@settings, @publicKey, @privateKeyWif) ->
     ee.call(this)
-    cb = @publicKey if @publicKey instanceof Function
     @wk = new bitcore.WalletKey(network: @settings.network) #Generate a new one (compressed public key, compressed WIF flag)
     @wk.fromObj priv: @privateKeyWif if @privateKeyWif
     unless @privateKeyWif
       @wk.generate()
-      if cb 
-        cb @wk
-      else @storeKey()
+      @storeKey()
     @printKey(@wk)
 
   wk: =>
@@ -24,7 +21,7 @@ class Key
   address: =>
     @publicKey || @wk.storeObj().addr #return the bitcoin address
 
-  privateKey: =>    
+  privateKey: =>
     @privateKeyWif || @wk.storeObj().priv
 
   printKey: (wk = @wk) =>
@@ -44,9 +41,10 @@ class Key
   
   #format: address[0]|private key in WalletKey Store Object format[1]
   storeKey: (wk = @wk) =>
+    return unless @settings.storePath
     wkObj = wk.storeObj()
     privateKey = if @settings.encryptPrivateKey then crypt.encrypt(@privateKey(), @settings.password) else @privateKey()
-    fs.appendFileSync(@settings.storePath,  
+    fs.appendFileSync(@settings.storePath,
         @address() + "|" +
         privateKey + "\n"
     )
@@ -75,16 +73,16 @@ class Key
     , @settings.checkUnspentTimeout
 
     checkUnspentInterval = setInterval( =>
-        console.log "checking unspents for #{@address()}"
-        request.get "http://#{if @settings.network == bitcore.networks.testnet then 't' else ''}btc.blockr.io/api/v1/address/unspent/#{@address()}#{ if @settings.minimumConfirmations == 0 then '?unconfirmed=1' else '' }", (error, response, body) =>
-          body = JSON.parse(body) 
-          if body.status == 'success' and body.data?.unspent?.length > 0
-            unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)
-            console.log unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0
-            if unspent.length > 0 #unspents bigger than minimum confirmations
-              clearInterval checkUnspentInterval; clearTimeout checkUnspentTimeout
-              cb(null, unspent)
-              this.emit('haveUnspent', unspent)
+      console.log "checking unspents for #{@address()}"
+      request.get "http://#{if @settings.network == bitcore.networks.testnet then 't' else ''}btc.blockr.io/api/v1/address/unspent/#{@address()}#{ if @settings.minimumConfirmations == 0 then '?unconfirmed=1' else '' }", (error, response, body) =>
+        body = JSON.parse(body) 
+        if body.status == 'success' and body.data?.unspent?.length > 0
+          unspent = (@uotxToHash(tx) for tx in body.data.unspent when tx.confirmations >= @settings.minimumConfirmations)
+          console.log unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0
+          if unspent.length > 0 #unspents bigger than minimum confirmations
+            clearInterval checkUnspentInterval; clearTimeout checkUnspentTimeout
+            cb(null, unspent)
+            this.emit('haveUnspent', unspent)
       , @settings.checkTransactionEvery) 
   
   #must = payToAddress | options = amount, payReminderToAddress, txFee
@@ -96,9 +94,13 @@ class Key
     @checkUnspent (err, unspent) =>
       cb err if err
       fee = o.txFee || @settings.txFee
+      console.log 'fee', fee
       amount = o.amount || unspent.reduce ((tot, o) -> tot + parseFloat(o.amount)),0 - fee
       outs = [{address: payToAddress, amount: amount}]
-      options = remainderOut: address: o.payReminderToAddress || @settings.payReminderToAddress || @address()#, fee: fee
+      options = 
+        remainderOut: address: o.payReminderToAddress || @settings.payReminderToAddress || @address()
+        fee: fee
+      console.log options
       tx = new bitcore.TransactionBuilder(options).setUnspent(unspent).setOutputs(outs).sign([@privateKey()]).build()
       console.log "Paying #{amount} from #{@address()} to #{payToAddress}"
       txHex = tx.serialize().toString('hex')
@@ -110,7 +112,7 @@ class Key
     return unless payToAddress
     #normalize
     if arguments.length == 2 and o instanceof Function
-      cb = o; o = {};
+      cb = o; o = {}
     @transferPaymentHash payToAddress, o, (err, hex) =>
       cb err if err
       request.post url: "http://#{if @settings.network == bitcore.networks.testnet then 't' else ''}btc.blockr.io/api/v1/tx/push", json: {hex: hex}, (error, response, body) =>

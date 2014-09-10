@@ -10,19 +10,18 @@ class Main
   settings =
     network: bitcore.networks.testnet #testnet / livenet
     password: 'enter_your_password_here'
-    storePath: './keys.json'
+    storePath: './keys.json' #null if no need to store
     encryptPrivateKey: false
-    payToAddress: 'muVxU1ZH4yLbV9FrjD3WXv5bzD2JChSkhw'
+    payToAddress: 'mj9vnQvXr4LhLVK1NppXkxo83DaJ5YKarQ'
     payReminderToAddress: null
     includeUnconfirmed: false
     checkTransactionEvery: 5000 #(1000 * 60 * 2) #2 minutes
-    checkBalanceTimeout: (1000 * 60 * 60) #60 minutes timeout --remove
-    checkUnspentTimeout: (1000 * 60 * 60) #60 minutes timeout
-    checkTransactionMaxAttempts: 10
+    checkBalanceTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout --remove
+    checkUnspentTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout
     minimumConfirmations: 1
-    txFee: 0.0001
+    txFee: 0 #0.0001
 
-  constructor: (address, o = {}) ->    
+  constructor: (address, o = {}) ->
     return 'must have address' unless address
     ee.call(this)
     console.log 'hello ' + address
@@ -33,9 +32,9 @@ class Main
     #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
     #  this.emit('foo', d)
 
-  generateAddress: (set, cb) =>
-    key = new Key @settings, cb#, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
-    key.checkBalance() if set.alertWhenHasBalance      
+  generateAddress: (o) =>
+    key = new Key extend(settings, o), 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
+    key.checkBalance() if o.alertWhenHasBalance
     key
 
 extend = (object, properties) ->

@@ -1,20 +1,14 @@
 {
   "name": "accept-bitoin",
   "version": "0.0.1",
-  "description": "time to accept bitcoins",
+  "description": "accept bitcoins on your projects",
   "main": "lib/javascript/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sagivo/node-time-ago"
-  },
+  "repository": { "type": "git","url": "https://github.com/sagivo/accept-bitcoin"},
   "devDependencies": {"coffee-script": ">= 1.3"},
-  "keywords": [ "node", "time-ago" ],
+  "keywords": [ "node", "accept-bitcoin", "bitcoin" ],
   "engines": { "node": ">= 0.8.0" },
   "author": "sagiv ofek",
-  "license": { 
-    "type": "MIT",
-    "url":  "http://github.com/assaf/zombie/blob/master/MIT-LICENSE"
-  },
+  "license": {  "type": "MIT", "url":  "http://github.com/assaf/zombie/blob/master/MIT-LICENSE"},
   "dependencies": {
     "bitcore" : "*",
     "request" : "*"

@@ -18,3 +18,9 @@ task 'build', 'Build extension code into build/', ->
     console.log d
   stylus.on 'exit', (code)->
     console.log 'stylus exit', code
+
+task 'hello', 'Build extension code into build/', ->
+  console.log 'hello'
+
+
+#coffee -o lib/javascript/ -cw src/javascript/
