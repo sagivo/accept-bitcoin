@@ -21,8 +21,8 @@ npm install accept-bitcoin
 Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU and storage).  
 Most of the users are using a wallet to store their bitcoins. This wallet is a simple way to secure your public and private key. For security reasons you better save this wallet offline in a "cold storage".   
 You need a way to accept bitcoins 
-When you want to accept a payment from a user you need to know that the user was the 
-Another issue is security - 
+More about the motivation behind this project at [my blog post](http://sagivo.com/post/97125970778/bitcoin-on-node-js-do-it-yourself).
+
 ##Example
 You can override the default settings on creating
 
