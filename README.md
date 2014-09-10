@@ -30,7 +30,7 @@ Examples are provided [here](https://github.com/sagivo/accept-bitcoin/blob/maste
 ```javascript
 var settings = {network: 'live'}
 var acceptBitcoin = require('accept-bitcoin');
-ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS', settings);
+var ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS', settings);
 key = ac.generateAddress({alertWhenHasBalance: true});
 console.log("Hello buyer! please pay to: " + key.address());
 key.on('hasBalance', function(amount){
