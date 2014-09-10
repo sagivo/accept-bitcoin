@@ -10,6 +10,7 @@ task 'build', 'Build extension code into build/', ->
     console.log d
   cofee.on 'exit', (code)->
     console.log 'cofee exit', code
+  ###
   #stylus listener
   stylus = cp.spawn "stylus", ["-o", "lib/css", "-w", "src/css", "-c"]
   stylus.stdout.on 'data', (d) ->
@@ -18,6 +19,7 @@ task 'build', 'Build extension code into build/', ->
     console.log d
   stylus.on 'exit', (code)->
     console.log 'stylus exit', code
+  ###
 
 task 'hello', 'Build extension code into build/', ->
   console.log 'hello'
