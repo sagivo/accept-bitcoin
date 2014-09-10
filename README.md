@@ -67,7 +67,8 @@ This class is responsible for creating new bitcoin adresses, storing them and tr
 Cointains helpers to encrypt and decrypt strings. Used for storing your keys data locally.  
 
 ##Contribute
-Please do. Fork it, star it, share it and add your code to the project. Help others. 
+Please do. Fork it, star it, share it and add your code to the project. Help others.  
+All the src code is written in [coffeescript](http://coffeescript.org) and is under `src/javascript`. There's a tool that convert it automatically to js each time you change a file and put it under `lib/javascript` folder. Simply run `cake build` for that. 
 
 ##License
 
