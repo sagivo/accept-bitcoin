@@ -46,7 +46,7 @@ key.on('hasBalance', function(amount){
 You can override the default settings:  
   - **payToAddress**: Your bitcoin adress you wish to transfer incomes to. 
   - **network**: choose your bitcoin RPC env. values are: `test` and `live`
-nore info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js)  
+more info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js)  
   - **password**: choose your random password to encrypt generated keys.  
   - **storePath**: path to store a file containing all the ad-hoc generated keys. Default is `./keys.json`
   - **encryptPrivateKey**: in case you want the stored keys to be encrypted (using `password`). Default is `false`.
