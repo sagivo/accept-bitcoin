@@ -1,5 +1,6 @@
-var settings = {payToAddress: 'YOUR_BITCOIN_ADDRESS'};
-var ac = require('accept-bitcoin')(settings);
+var settings = {network: 'live'}
+var acceptBitcoin = require('accept-bitcoin');
+ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS', settings);
 key = ac.generateAddress({alertWhenHasBalance: true});
 console.log("Hello buyer! please pay to: " + key.address());
 key.on('hasBalance', function(amount){
