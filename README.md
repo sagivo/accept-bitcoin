@@ -50,8 +50,8 @@ key.on('hasBalance', function(amount){
 
 You can override the default settings:  
 
-|          name         | type   |         default value        |                                                                                 comment                                                                                 |
-|:---------------------:|--------|:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| name                  | type   | default value                | comment                                                                                                                                                                 |
+|-----------------------|--------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | payToAddress          | string | -                            | Your bitcoin adress you wish to transfer incomes to.                                                                                                                    |
 | network               | string | test                         | choose your bitcoin RPC env. values are: `test` and `live`more info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js) |
 | password              | string | -                            | choose your random password to encrypt generated keys.                                                                                                                  |
@@ -64,7 +64,6 @@ You can override the default settings:
 | checkUnspentTimeout   | int    | 1000 * 60 * 60 * 2 (2 hours) | timeout when checking unspent transactions of an address.                                                                                                               |
 | minimumConfirmations  | int    | 6                            | minimum confirmations needed in order to trigger `hasBalance` event.                                                                                                    |
 | txFee                 | float  | 0.0001                       | fee (in bitcoin) for transferring amount from ad hoc address to your address.                                                                                           |
-
 
 ###Key class
 This class is responsible for creating new bitcoin addresses, storing them and transferring funds between them. Some key functions are:  
