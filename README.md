@@ -49,19 +49,34 @@ key.on('hasBalance', function(amount){
 ##Settings
 
 You can override the default settings:  
-  - **payToAddress**: Your bitcoin adress you wish to transfer incomes to. 
-  - **network**: choose your bitcoin RPC env. values are: `test` and `live`
-more info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js)  
-  - **password**: choose your random password to encrypt generated keys.  
-  - **storePath**: path to store a file containing all the ad-hoc generated keys. Default is `./keys.json`
-  - **encryptPrivateKey**: in case you want the stored keys to be encrypted (using `password`). Default is `false`.
-  - **payReminderToAddress**: In case transfer amount is smaller than income and fees. 
-  - **includeUnconfirmed**: include unconfirmed transactions when checking for unspent incomes. Default is `false`
-  - **checkTransactionEvery**: how often to ping the network when checking for transactions. Default is 2 minutes. 
-  - **checkBalanceTimeout**: timeout when checking balance of an address. Default is 120 minutes. 
-  - **checkUnspentTimeout**: timeout when checking unspent transactions of an address. Default is 120 minutes. 
-  - **minimumConfirmations**: minimum confirmations needed in order to trigger `` event. Default is 6 (around 1 hour to achieve 6 confirmations).
-  - **txFee**: fee (in bitcoin) for transferring amount from ad hoc address to your address. Default is `0.0001`. [More here](https://en.bitcoin.it/wiki/Transaction_fees).
+  +-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|          name         | type   |         default value        |                                                                                 comment                                                                                 |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| payToAddress          | string | -                            | Your bitcoin adress you wish to transfer incomes to.                                                                                                                    |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| network               | string | test                         | choose your bitcoin RPC env. values are: `test` and `live`more info [here](https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js) |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| password              | string | -                            | choose your random password to encrypt generated keys.                                                                                                                  |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| storePath             | string | `./keys.json`                | path to store a file containing all the ad-hoc generated keys.                                                                                                          |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| encryptPrivateKey     | bool   | false                        | in case you want the stored keys to be encrypted (using `password`).                                                                                                    |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| payReminderToAddress  | string | payToAddress                 | In case transfer amount is smaller than income and fees.                                                                                                                |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| includeUnconfirmed    | bool   | false                        | include unconfirmed transactions when checking for unspent incomes                                                                                                      |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checkTransactionEvery | int    | 1000 * 60 * 2                | how often to ping the network when checking for transactions. time in millisecond.                                                                                      |
+|                       |        | (2 minutes)                  |                                                                                                                                                                         |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checkBalanceTimeout   | int    | 1000 * 60 * 60 * 2 (2 hours) | timeout when checking balance of an address.                                                                                                                            |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checkUnspentTimeout   | int    | 1000 * 60 * 60 * 2 (2 hours) | timeout when checking unspent transactions of an address.                                                                                                               |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| minimumConfirmations  | int    | 6                            | minimum confirmations needed in order to trigger `hasBalance` event.                                                                                                    |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| txFee                 | float  | 0.0001                       | fee (in bitcoin) for transferring amount from ad hoc address to your address.                                                                                           |
++-----------------------+--------+------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ###Key class
 This class is responsible for creating new bitcoin addresses, storing them and transferring funds between them. Some key functions are:  
