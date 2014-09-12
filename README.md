@@ -4,8 +4,8 @@
 Finally a developer-friendly tool to simply accept bitcoins in your site. 
 
   - Lite and fast, built on top of [bitcore](http://bitcore.io).
-  - No need to install local bitcoin node RPC client.
-  - No need to install any wallet client.
+  - No need to install local bitcoin node RPC client. We use [blockr](http://blockr.io) API instead.
+  - No need to install any wallet client. 
   - Create ad-hoc address to accept bitcoins and transfer incomes to your offline account.
   - Easy configurations.
 
@@ -14,11 +14,17 @@ Finally a developer-friendly tool to simply accept bitcoins in your site.
 
 Simply install via [npm](https://npmjs.org/):
 
-```
+```javascript
 npm install accept-bitcoin
 ```
+Load AC and you're ready to go!
+```javascript
+var acceptBitcoin = require('accept-bitcoin');
+var ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS');
+```
+
 ##Motivation 
-Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU and storage).  
+Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU, networking and storage).  
 Most of the users are using a wallet to store their bitcoins. This wallet is a simple way to secure your public and private key. For security reasons you better save this wallet offline in a "cold storage".   
 You need a way to accept bitcoins 
 More about the motivation behind this project at [my blog post](http://sagivo.com/post/97125970778/bitcoin-on-node-js-do-it-yourself).
@@ -74,4 +80,3 @@ All the src code is written in [coffeescript](http://coffeescript.org) and is un
 ##License
 
 MIT
-
