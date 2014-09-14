@@ -1,6 +1,5 @@
 #Accept Bitcoin
 
-
 Finally a developer-friendly tool to simply accept bitcoins in your site. 
 
   - Lite and fast, built on top of [bitcore](http://bitcore.io).
