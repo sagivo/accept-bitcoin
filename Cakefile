@@ -3,7 +3,7 @@ cp = require 'child_process'
 
 task 'build', 'Build extension code into build/', ->
   #cofeescript listener
-  cofee = cp.spawn "coffee", ["-o", "lib/javascript/", "-cw", "src/javascript/"]
+  cofee = cp.spawn "coffee", ["-o", "lib/", "-cw", "src/"]
   cofee.stdout.on 'data', (d) ->
     console.log d
   cofee.stderr.on 'error', (d) ->
@@ -12,7 +12,7 @@ task 'build', 'Build extension code into build/', ->
     console.log 'cofee exit', code
   ###
   #stylus listener
-  stylus = cp.spawn "stylus", ["-o", "lib/css", "-w", "src/css", "-c"]
+  stylus = cp.spawn "stylus", ["-o", "lib", "-w", "src", "-c"]
   stylus.stdout.on 'data', (d) ->
     console.log d
   stylus.stderr.on 'error', (d) ->
@@ -25,4 +25,4 @@ task 'hello', 'Build extension code into build/', ->
   console.log 'hello'
 
 
-#coffee -o lib/javascript/ -cw src/javascript/
+#coffee -o lib/ -cw src/
