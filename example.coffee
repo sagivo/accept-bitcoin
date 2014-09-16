@@ -1,4 +1,4 @@
-Ac = require('./lib/javascript/index')
+Ac = require('./lib/index')
 ac = new Ac('sagiv ofek')
 console.log ac
 ###

@@ -1,8 +1,8 @@
 {
   "name": "accept-bitcoin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "accept bitcoins on your projects",
-  "main": "lib/javascript/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/sagivo/accept-bitcoin"
