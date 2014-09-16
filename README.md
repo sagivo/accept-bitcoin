@@ -30,7 +30,7 @@ More about the motivation behind this project at [my blog post](http://sagivo.co
 ##Example
 You can override the default settings on creating
 
-Examples are provided [here](https://github.com/sagivo/accept-bitcoin/blob/master/examples.js)
+Examples are provided [here](https://github.com/sagivo/accept-bitcoin/tree/master/examples)
 ```javascript
 var settings = {network: 'live'}
 var acceptBitcoin = require('accept-bitcoin');
