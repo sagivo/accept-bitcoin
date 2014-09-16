@@ -35,8 +35,8 @@
 
 <ul>
 <li>Lite and fast, built on top of <a href="http://bitcore.io">bitcore</a>.</li>
-<li>No need to install local bitcoin node RPC client.</li>
-<li>No need to install any wallet client.</li>
+<li>No need to install local bitcoin node RPC client. We use <a href="http://blockr.io">blockr</a> API instead.</li>
+<li>No need to install any wallet client. </li>
 <li>Create ad-hoc address to accept bitcoins and transfer incomes to your offline account.</li>
 <li>Easy configurations.</li>
 </ul><h2>
@@ -44,15 +44,20 @@
 
 <p>Simply install via <a href="https://npmjs.org/">npm</a>:</p>
 
-<pre><code>npm install accept-bitcoin
-</code></pre>
+<div class="highlight highlight-javascript"><pre><span class="nx">npm</span> <span class="nx">install</span> <span class="nx">accept</span><span class="o">-</span><span class="nx">bitcoin</span>
+</pre></div>
+
+<p>Load AC and you're ready to go!</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">acceptBitcoin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'accept-bitcoin'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ac</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">acceptBitcoin</span><span class="p">(</span><span class="s1">'YOUR_BITCOIN_ADDRESS'</span><span class="p">);</span>
+</pre></div>
 
 <h2>
 <a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
 
-<p>Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU and storage).<br>
+<p>Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU, networking and storage).<br>
 Most of the users are using a wallet to store their bitcoins. This wallet is a simple way to secure your public and private key. For security reasons you better save this wallet offline in a "cold storage".<br>
-You need a way to accept bitcoins 
 More about the motivation behind this project at <a href="http://sagivo.com/post/97125970778/bitcoin-on-node-js-do-it-yourself">my blog post</a>.</p>
 
 <h2>
@@ -60,7 +65,7 @@ More about the motivation behind this project at <a href="http://sagivo.com/post
 
 <p>You can override the default settings on creating</p>
 
-<p>Examples are provided <a href="https://github.com/sagivo/accept-bitcoin/blob/master/examples.js">here</a></p>
+<p>Examples are provided <a href="https://github.com/sagivo/accept-bitcoin/tree/master/examples">here</a></p>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="nx">network</span><span class="o">:</span> <span class="s1">'live'</span><span class="p">}</span>
 <span class="kd">var</span> <span class="nx">acceptBitcoin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'accept-bitcoin'</span><span class="p">);</span>
@@ -68,7 +73,7 @@ More about the motivation behind this project at <a href="http://sagivo.com/post
 <span class="nx">key</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">generateAddress</span><span class="p">({</span><span class="nx">alertWhenHasBalance</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello buyer! please pay to: "</span> <span class="o">+</span> <span class="nx">key</span><span class="p">.</span><span class="nx">address</span><span class="p">());</span>
 <span class="nx">key</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'hasBalance'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">amount</span><span class="p">){</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">"thanks for paying me "</span> <span class="o">+</span> <span class="nx">amount</span><span class="p">;</span> <span class="c1">//do stuff</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"thanks for paying me "</span> <span class="o">+</span> <span class="nx">amount</span><span class="p">);</span> <span class="c1">//do stuff</span>
   <span class="nx">key</span><span class="p">.</span><span class="nx">transferBalanceToMyAccount</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">d</span><span class="p">){</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'success'</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Cool, the bitcoins are in my private account!"</span><span class="p">);</span>
   <span class="p">});</span>
@@ -80,37 +85,89 @@ More about the motivation behind this project at <a href="http://sagivo.com/post
 
 <p>You can override the default settings:  </p>
 
-<ul>
-<li>
-<strong>payToAddress</strong>: Your bitcoin adress you wish to transfer incomes to. </li>
-<li>
-<strong>network</strong>: choose your bitcoin RPC env. values are: <code>test</code> and <code>live</code>
-more info <a href="https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js">here</a><br>
-</li>
-<li>
-<strong>password</strong>: choose your random password to encrypt generated keys.<br>
-</li>
-<li>
-<strong>storePath</strong>: path to store a file containing all the ad-hoc generated keys. Default is <code>./keys.json</code>
-</li>
-<li>
-<strong>encryptPrivateKey</strong>: in case you want the stored keys to be encrypted (using <code>password</code>). Default is <code>false</code>.</li>
-<li>
-<strong>payReminderToAddress</strong>: In case transfer amount is smaller than income and fees. </li>
-<li>
-<strong>includeUnconfirmed</strong>: include unconfirmed transactions when checking for unspent incomes. Default is <code>false</code>
-</li>
-<li>
-<strong>checkTransactionEvery</strong>: how often to ping the network when checking for transactions. Default is 2 minutes. </li>
-<li>
-<strong>checkBalanceTimeout</strong>: timeout when checking balance of an address. Default is 120 minutes. </li>
-<li>
-<strong>checkUnspentTimeout</strong>: timeout when checking unspent transactions of an address. Default is 120 minutes. </li>
-<li>
-<strong>minimumConfirmations</strong>: minimum confirmations needed in order to trigger `` event. Default is 6 (around 1 hour to achieve 6 confirmations).</li>
-<li>
-<strong>txFee</strong>: fee (in bitcoin) for transferring amount from ad hoc address to your address. Default is <code>0.0001</code>. <a href="https://en.bitcoin.it/wiki/Transaction_fees">More here</a>.</li>
-</ul><h3>
+<table>
+<thead><tr>
+<th>name</th>
+<th>type</th>
+<th>default value</th>
+<th>comment</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>payToAddress</code></td>
+<td>string</td>
+<td>-</td>
+<td>Your bitcoin adress you wish to transfer incomes to.</td>
+</tr>
+<tr>
+<td><code>network</code></td>
+<td>string</td>
+<td>test</td>
+<td>choose your bitcoin RPC env. values are: <code>test</code> and <code>live</code>more info <a href="https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c40366d8d5dc04ce1939d7/networks.js">here</a>
+</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>-</td>
+<td>choose your random password to encrypt generated keys.</td>
+</tr>
+<tr>
+<td><code>storePath</code></td>
+<td>string</td>
+<td><code>./keys.txt</code></td>
+<td>path to store a file containing all the ad-hoc generated keys.</td>
+</tr>
+<tr>
+<td><code>encryptPrivateKey</code></td>
+<td>bool</td>
+<td>false</td>
+<td>in case you want the stored keys to be encrypted (using <code>password</code>).</td>
+</tr>
+<tr>
+<td><code>payReminderToAddress</code></td>
+<td>string</td>
+<td>payToAddress</td>
+<td>In case transfer amount is smaller than income and fees.</td>
+</tr>
+<tr>
+<td><code>includeUnconfirmed</code></td>
+<td>bool</td>
+<td>false</td>
+<td>include unconfirmed transactions when checking for unspent incomes</td>
+</tr>
+<tr>
+<td><code>checkTransactionEvery</code></td>
+<td>int</td>
+<td>1000 * 60 * 2  (2 minutes)</td>
+<td>how often (in millisecond) to ping the network when checking for transactions.</td>
+</tr>
+<tr>
+<td><code>checkBalanceTimeout</code></td>
+<td>int</td>
+<td>1000 * 60 * 60 * 2 (2 hours)</td>
+<td>timeout (in millisecond) when checking balance of an address.</td>
+</tr>
+<tr>
+<td><code>checkUnspentTimeout</code></td>
+<td>int</td>
+<td>1000 * 60 * 60 * 2 (2 hours)</td>
+<td>timeout (in millisecond) when checking unspent transactions of an address.</td>
+</tr>
+<tr>
+<td><code>minimumConfirmations</code></td>
+<td>int</td>
+<td>6</td>
+<td>minimum confirmations needed in order to trigger <code>hasBalance</code> event.</td>
+</tr>
+<tr>
+<td><code>txFee</code></td>
+<td>float</td>
+<td>0.0001</td>
+<td>fee (in bitcoin) for transferring amount from ad hoc address to your address.</td>
+</tr>
+</tbody>
+</table><h3>
 <a name="key-class" class="anchor" href="#key-class"><span class="octicon octicon-link"></span></a>Key class</h3>
 
 <p>This class is responsible for creating new bitcoin addresses, storing them and transferring funds between them. Some key functions are:<br><code>storeKey(wk)</code> - store your key in a local file. Can be encrypted.<br><code>checkBalance()</code>- check and notify you when an address has minimum balance.
@@ -125,7 +182,7 @@ more info <a href="https://github.com/bitpay/bitcore/blob/cd353ac02e76fb3294c403
 <a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
 
 <p>Please do. Fork it, star it, share it and add your code to the project. Help others.<br>
-All the src code is written in <a href="http://coffeescript.org">coffeescript</a> and is under <code>src/javascript</code>. There's a tool that convert it automatically to js each time you change a file and put it under <code>lib/javascript</code> folder. Simply run <code>cake build</code> for that. </p>
+All the src code is written in <a href="http://coffeescript.org">coffeescript</a> and is under <code>src</code>. There's a tool that convert it automatically to js each time you change a file and put it under <code>lib</code> folder. Simply run <code>cake build</code> for that. </p>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
