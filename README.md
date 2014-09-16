@@ -1,4 +1,4 @@
-#Accept Bitcoin
+#Accept Bitcoin ![accept-bitcoin](https://en.bitcoin.it/w/images/en/7/74/BC_Rnd_64px.png)
 
 Finally a developer-friendly tool to simply accept bitcoins in your site. 
 
