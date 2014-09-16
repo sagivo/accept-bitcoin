@@ -10,7 +10,7 @@ class Main
   settings =
     network: 'test' #test / live
     password: 'enter_your_password_here'
-    storePath: './keys.json' #null if no need to store
+    storePath: './keys.txt' #null if no need to store
     encryptPrivateKey: false
     payToAddress: 'PUT_YOUR_ADDRESS_HERE'
     payReminderToAddress: null
