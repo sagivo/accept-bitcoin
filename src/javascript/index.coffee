@@ -4,6 +4,7 @@ Key  = require './key'
 Transaction  = require './transaction'
 Key  = require './key'
 fs = require 'fs'
+crypt  = require './encrypt'
 ee = require('events').EventEmitter
 
 class Main
@@ -36,6 +37,13 @@ class Main
     key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
     key.checkBalance() if o and o.alertWhenHasBalance
     key
+
+  encrypt: (s) =>
+    crypt.encrypt s, @settings.password
+    
+  decrypt: (s) =>
+    crypt.decrypt s, @settings.password
+
 
 extend = (object, properties) ->
   for key, val of properties
