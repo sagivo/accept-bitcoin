@@ -20,7 +20,7 @@ class Main
     checkBalanceTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout --remove
     checkUnspentTimeout: (1000 * 60 * 60 * 2) #60 minutes timeout
     minimumConfirmations: 1
-    txFee: 0 #0.0001
+    txFee: 0.0001
 
   constructor: (address, o = {}) ->
     return 'must have address' unless address
@@ -33,8 +33,11 @@ class Main
     #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
     #  this.emit('foo', d)
 
-  generateAddress: (o) =>
-    key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
+  generateAddress: (o, privateKey) =>
+    if privateKey
+      key = new Key settings, o, privateKey
+    else
+      key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
     key.checkBalance() if o and o.alertWhenHasBalance
     key
 
