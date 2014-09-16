@@ -27,17 +27,12 @@ class Main
     ee.call(this)
     console.log 'hello ' + address
     @settings = extend(settings, o)
-    #key = new Key @settings, 'mnica1rWZbM6cRoMUy956DUAv6etDUszBR', 'cTauWUoGmuxARTVjgh8L7SJ9VtqsqbFacPXv4idJ27dwuPmF9djH'
-    #tx = new Transaction(key, @settings)
-    #tx.checkBalance (err, d) =>
-    #tx.pushTx 'mookaUALkRngyevqAP6gyekqNBMtjoRJBm', transferAmount: '0.0001', (err, d) =>
-    #  this.emit('foo', d)
 
   generateAddress: (o, privateKey) =>
     if privateKey
       key = new Key settings, o, privateKey
     else
-      key = new Key extend(settings, o)#, 'mx5nzg1tRwADWDCU53CSHmY7iac2f4B2YK', 'cUWFtYbNycND7wQ9QZKPimkrKQoU9uYJ8M1nyV7W24bXaVdPhTtQ'
+      key = new Key extend(settings, o)
     key.checkBalance() if o and o.alertWhenHasBalance
     key
 
