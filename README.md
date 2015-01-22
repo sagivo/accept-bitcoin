@@ -8,7 +8,6 @@ Finally a developer-friendly tool to simply accept bitcoins in your site.
   - Create ad-hoc address to accept bitcoins and transfer incomes to your offline account.
   - Easy configurations.
 
-
 ##Get Started
 
 Simply install via [npm](https://npmjs.org/):
