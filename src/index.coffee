@@ -2,7 +2,6 @@ http = require 'http'
 bitcore  = require 'bitcore'
 Key  = require './key'
 Transaction  = require './transaction'
-Key  = require './key'
 fs = require 'fs'
 crypt  = require './encrypt'
 ee = require('events').EventEmitter

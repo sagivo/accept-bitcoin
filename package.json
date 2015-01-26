@@ -24,7 +24,7 @@
     "url": "http://github.com/assaf/zombie/blob/master/MIT-LICENSE"
   },
   "dependencies": {
-    "bitcore": "*",
+    "bitcore": "0.1.41",
     "request": "*"
   }
 }
