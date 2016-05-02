@@ -19,10 +19,7 @@
     "node": ">= 0.8.0"
   },
   "author": "sagiv ofek",
-  "license": {
-    "type": "MIT",
-    "url": "http://github.com/assaf/zombie/blob/master/MIT-LICENSE"
-  },
+  "license": "MIT",
   "dependencies": {
     "bitcore": "0.1.41",
     "request": "*"
