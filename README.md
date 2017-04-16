@@ -1,4 +1,4 @@
-#Accept Bitcoin ![accept-bitcoin](https://en.bitcoin.it/w/images/en/7/74/BC_Rnd_64px.png)
+# Accept Bitcoin ![accept-bitcoin](https://en.bitcoin.it/w/images/en/7/74/BC_Rnd_64px.png)
 
 Finally a developer-friendly tool to simply accept bitcoins in your site. 
 
@@ -8,7 +8,7 @@ Finally a developer-friendly tool to simply accept bitcoins in your site.
   - Create ad-hoc address to accept bitcoins and transfer incomes to your offline account.
   - Easy configurations.
 
-##Get Started
+## Get Started
 
 Simply install via [npm](https://npmjs.org/):
 
@@ -21,12 +21,12 @@ var acceptBitcoin = require('accept-bitcoin');
 var ac = new acceptBitcoin('YOUR_BITCOIN_ADDRESS');
 ```
 
-##Motivation 
+## Motivation 
 Accepting bitcoins online can be complex to program and require you to install a bitcoin RPC client in order to read and write to the blockchain. This client require a lot of resources (in terms of CPU, networking and storage).  
 Most of the users are using a wallet to store their bitcoins. This wallet is a simple way to secure your public and private key. For security reasons you better save this wallet offline in a "cold storage".  
 More about the motivation behind this project at [my blog post](http://sagivo.com/post/97125970778/bitcoin-on-node-js-do-it-yourself).
 
-##Example
+## Example
 You can override the default settings on creating
 
 Examples are provided [here](https://github.com/sagivo/accept-bitcoin/tree/master/examples)
@@ -44,7 +44,7 @@ key.on('hasBalance', function(amount){
 });
 ```
 
-##Settings
+## Settings
 
 You can override the default settings:  
 
@@ -63,19 +63,19 @@ You can override the default settings:
 | `minimumConfirmations`  | int    | 6                            | minimum confirmations needed in order to trigger `hasBalance` event.                                                                                                    |
 | `txFee`                 | float  | 0.0001                       | fee (in bitcoin) for transferring amount from ad hoc address to your address.                                                                                           |
 
-###Key class
+### Key class
 This class is responsible for creating new bitcoin addresses, storing them and transferring funds between them. Some key functions are:  
 `storeKey(wk)` - store your key in a local file. Can be encrypted.  
 `checkBalance()`- check and notify you when an address has minimum balance.
 `payTo(payToAddress, options, callback)` - transfer all balance of this address to another address.
 
-###Encrypt class
+### Encrypt class
 Contains helpers to encrypt and decrypt strings. Used for storing your keys data locally.  
 
-##Contribute
+## Contribute
 Please do. Fork it, star it, share it and add your code to the project. Help others.  
 All the src code is written in [coffeescript](http://coffeescript.org) and is under `src`. There's a tool that convert it automatically to js each time you change a file and put it under `lib` folder. Simply run `cake build` for that. 
 
-##License
+## License
 
 MIT
